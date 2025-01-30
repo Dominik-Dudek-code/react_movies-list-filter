@@ -16,15 +16,17 @@ export function filterMovies(movies: Movie[], inputValue: string) {
     return movies;
   }
 
+  const trimmedLowercaseInput = inputValue.trim().toLocaleLowerCase();
+
   return movies.filter(movie => {
-    return (
-      movie.title
-        .toLocaleLowerCase()
-        .includes(inputValue.trim().toLocaleLowerCase()) ||
-      movie.description
-        .toLocaleLowerCase()
-        .includes(inputValue.trim().toLocaleLowerCase())
-    );
+    const isTitleMatching = movie.title
+      .toLocaleLowerCase()
+      .includes(trimmedLowercaseInput);
+    const isDescriptionMatching = movie.description
+      .toLocaleLowerCase()
+      .includes(trimmedLowercaseInput);
+
+    return isTitleMatching || isDescriptionMatching;
   });
 }
 
